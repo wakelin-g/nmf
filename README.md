@@ -1,6 +1,4 @@
 This repository describes how to perform non-negative matrix factoriation (NMF) in C++ using the mlpack libraries.
-## Background 
-Nonnegative matrix factorization (NMF) aims to find a low-rank approximation of a non-negative matrix $X$
 
 ## Installation and Setup
 Install the relevant C++ libraries (mlpack, argparse) using homebrew by running the `setup.sh` script
