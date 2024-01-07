@@ -44,7 +44,7 @@ int main(int argc, char **argv) {
   }
 
   mlpack::NMFALSFactorizer nmf;
-  double residue = nmf.Apply(V, r, W, H);
+  double residue = nmf.Apply(V, r, H, W);
 
   if (program["-p"] == true) {
     std::string fname_base = std::string(std::filesystem::path(fname).stem());
