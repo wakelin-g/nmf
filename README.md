@@ -14,15 +14,39 @@ export LIBRARY_PATH=/opt/homebrew/lib
 ```
 You can compile the NMF program by running `Make` in the same directory as the source files.
 
-## Running the Program
-NMF can be run on an input file `input.csv` as
+## Usage
+To compile the NMF program, `cd` into the `src` directory and run `Make`
 ```
-./nmf input.csv
+> cd src
+> make
+g++-13 -O3 -std=c++17 -o nmf nmf.cpp -larmadillo -fopenmp
+> ls
+Makefile  nmf  nmf.cpp
 ```
-
-The $W$ and $H$ matrices will be saved in their own csv files
+The `nmf` executable can be run on a provided input file
+```
+./nmf ../data/norm-wt-m1-non.csv
+```
+This produces the output matrices $H$ and $W$ in csv format in whichever directory that the binary was executed from
 ```
 > ls
-W.csv
-H.csv
+H.csv  Makefile  nmf  nmf.cpp  W.csv
 ```
+Alternatively, you can specify where you want to save the $H$ and $W$ matrices using the `-o`/`--output` option
+```
+> rm H.csv W.csv
+> mkdir results
+> ./nmf ../data/norm-wt-m1-non.csv -o results
+> ls
+results  Makefile  nmf  nmf.cpp
+> ls results
+H.csv  W.csv
+```
+If desired, the name of the input can be prepended to the filenames of the output matrices using the `-p`/`--prepend-input` flag
+```
+> rm results/*
+> ./nmf ../data/norm-wt-m1-non.csv -o results -p
+> ls results
+norm-wt-m1-non_H.csv  norm-wt-m1-non_W.csv
+```
+Finally, the rank of the factorization (equivalent to `n_comps` in sklearn) can be optionally specified using the `-r`/`--rank` option. By default, this is set to 7.
